@@ -15,7 +15,7 @@ class PointNormalizer implements NormalizerInterface, DenormalizerInterface
      *
      * @return array{latitude:float,longitude:float}
      */
-    public function normalize(mixed $object, string $format = null, array $context = []): array
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         return [
             'latitude' => $object->getLatitude(),
@@ -23,7 +23,7 @@ class PointNormalizer implements NormalizerInterface, DenormalizerInterface
         ];
     }
 
-    public function supportsNormalization($data, string $format = null, array $context = []): bool
+    public function supportsNormalization($data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof Point;
     }
@@ -36,12 +36,12 @@ class PointNormalizer implements NormalizerInterface, DenormalizerInterface
      *
      * @return Point
      */
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): Point
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): Point
     {
         return new Point($data['latitude'], $data['longitude']);
     }
 
-    public function supportsDenormalization($data, string $type, string $format = null, array $context = []): bool
+    public function supportsDenormalization($data, string $type, ?string $format = null, array $context = []): bool
     {
         return Point::class === $type;
     }
